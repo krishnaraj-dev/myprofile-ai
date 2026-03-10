@@ -1,22 +1,23 @@
-import React from 'react';
-import { portfolioData } from './data/portfolio';
-import { ChatContainer } from './components/ChatContainer';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { Skills } from './components/Skills';
-import { Projects } from './components/Projects';
-import { Articles } from './components/Articles';
-import { Experience } from './components/Experience';
-import { Achievements } from './components/Achievements';
-import { Leadership } from './components/Leadership';
-import { CareerPath } from './components/CareerPath';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
-import { BackgroundEffect } from './components/BackgroundEffect';
-import { useAppStore } from './store/useStore';
+"use client";
+import React from "react";
+import { portfolioData } from "./data/portfolio";
+import { ChatContainer } from "./components/ChatContainer";
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { Skills } from "./components/Skills";
+import { Projects } from "./components/Projects";
+import { Articles } from "./components/Articles";
+import { Experience } from "./components/Experience";
+import { Achievements } from "./components/Achievements";
+import { Leadership } from "./components/Leadership";
+import { CareerPath } from "./components/CareerPath";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
+import { BackgroundEffect } from "./components/BackgroundEffect";
 
 export default function PortfolioPage() {
-  const { developer_profile, skills, experience, achievements, contact } = portfolioData;
+  const { developer_profile, skills, experience, achievements, contact } =
+    portfolioData;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-600 selection:text-white">

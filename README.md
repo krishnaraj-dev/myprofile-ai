@@ -10,11 +10,22 @@ View your app in AI Studio: https://ai.studio/apps/8b7c8191-4b8a-4d9b-ace7-5a9be
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Set the Gemini API key:
+   - Vite SPA: `VITE_GEMINI_API_KEY` in `.env.local`
+   - Next App Router (server): `GEMINI_API_KEY` in `.env.local`
 3. Run the app:
-   `npm run dev`
+   - Vite SPA: `npm run dev`
+   - Next App Router: `npm run dev:next`
+
+## Deploy to GitHub Pages
+
+This repo auto-deploys the Vite SPA to GitHub Pages on pushes to `main` via `.github/workflows/gh-pages.yml`.
+
+Manual deploy:
+
+1. `pnpm install`
+2. `pnpm deploy`

@@ -1,11 +1,11 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  base: './',
+  base: "./",
   plugins: [react(), tsconfigPaths()],
-  envPrefix: ['VITE_', 'NEXT_PUBLIC_', 'GEMINI_'],
+  envPrefix: ["VITE_"],
   server: {
     port: 3000,
   },

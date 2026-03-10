@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface AppState {
   isMobileMenuOpen: boolean;
@@ -11,5 +11,6 @@ export const useAppStore = create<AppState>((set) => ({
   isMobileMenuOpen: false,
   setIsMobileMenuOpen: (open) => set({ isMobileMenuOpen: open }),
   visibleProjects: 6,
-  showMoreProjects: () => set((state) => ({ visibleProjects: state.visibleProjects + 6 })),
+  showMoreProjects: () =>
+    set((state) => ({ visibleProjects: state.visibleProjects + 6 })),
 }));

@@ -1,5 +1,6 @@
-import React from 'react';
-import { ChatInterface } from './ChatInterface';
+"use client";
+import React from "react";
+import { ChatInterface } from "./ChatInterface";
 
 export const ChatContainer: React.FC = () => {
   return (

@@ -1,21 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, Sparkles, MessageSquare, X, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import ReactMarkdown from 'react-markdown';
-import { getChatResponseStream } from '../lib/gemini';
-import { portfolioData } from '../data/portfolio';
+"use client";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Send,
+  Bot,
+  User,
+  Loader2,
+  MessageSquare,
+  ChevronDown,
+} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import ReactMarkdown from "react-markdown";
+import { getChatResponseStream } from "../lib/gemini";
+import { portfolioData } from "../data/portfolio";
 
 interface Message {
-  role: 'user' | 'model';
+  role: "user" | "model";
   content: string;
 }
 
 export const ChatInterface = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', content: "Hi! I'm Krishnaraj's AI assistant. I can help you learn about my skills, experience, and achievements. What would you like to know?" }
+    {
+      role: "model",
+      content:
+        "Hi! I'm Krishnaraj's AI assistant. I can help you learn about my skills, experience, and achievements. What would you like to know?",
+    },
   ]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,27 +48,29 @@ export const ChatInterface = () => {
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
-    setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setInput("");
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
-    const history = messages.map(m => ({
-      role: m.role,
-      parts: [{ text: m.content }]
-    }));
+    const history = [...messages, { role: "user", content: userMessage }].map(
+      (m) => ({
+        role: m.role,
+        parts: [{ text: m.content }],
+      }),
+    );
 
-    let fullResponse = '';
-    setMessages(prev => [...prev, { role: 'model', content: '' }]);
+    let fullResponse = "";
+    setMessages((prev) => [...prev, { role: "model", content: "" }]);
 
     await getChatResponseStream(userMessage, history, (chunk) => {
       fullResponse += chunk;
-      setMessages(prev => {
+      setMessages((prev) => {
         const newMessages = [...prev];
         newMessages[newMessages.length - 1].content = fullResponse;
         return newMessages;
       });
     });
-    
+
     setIsLoading(false);
   };
 
@@ -96,14 +110,16 @@ export const ChatInterface = () => {
                   <Bot className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-black text-slate-900 uppercase tracking-tight">Krishnaraj</h3>
+                  <h3 className="font-black text-slate-900 uppercase tracking-tight">
+                    Krishnaraj
+                  </h3>
                   <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     AI Assistant Active
                   </p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="p-2.5 hover:bg-slate-100 rounded-xl transition-all text-slate-400 hover:text-slate-900"
               >
@@ -112,7 +128,7 @@ export const ChatInterface = () => {
             </div>
 
             {/* Messages */}
-            <div 
+            <div
               ref={scrollRef}
               className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth no-scrollbar"
             >
@@ -122,19 +138,31 @@ export const ChatInterface = () => {
                     key={index}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                   >
-                    <div className={`flex gap-4 max-w-[85%] ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm ${
-                        message.role === 'user' ? 'bg-slate-100' : 'bg-indigo-600'
-                      }`}>
-                        {message.role === 'user' ? <User className="w-5 h-5 text-slate-600" /> : <Bot className="w-5 h-5 text-white" />}
+                    <div
+                      className={`flex gap-4 max-w-[85%] ${message.role === "user" ? "flex-row-reverse" : "flex-row"}`}
+                    >
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm ${
+                          message.role === "user"
+                            ? "bg-slate-100"
+                            : "bg-indigo-600"
+                        }`}
+                      >
+                        {message.role === "user" ? (
+                          <User className="w-5 h-5 text-slate-600" />
+                        ) : (
+                          <Bot className="w-5 h-5 text-white" />
+                        )}
                       </div>
-                      <div className={`p-4 rounded-2xl text-sm font-medium leading-relaxed ${
-                        message.role === 'user' 
-                          ? 'bg-indigo-600 text-white rounded-tr-none shadow-lg shadow-indigo-100' 
-                          : 'bg-white text-slate-800 border border-slate-100 rounded-tl-none shadow-sm'
-                      }`}>
+                      <div
+                        className={`p-4 rounded-2xl text-sm font-medium leading-relaxed ${
+                          message.role === "user"
+                            ? "bg-indigo-600 text-white rounded-tr-none shadow-lg shadow-indigo-100"
+                            : "bg-white text-slate-800 border border-slate-100 rounded-tl-none shadow-sm"
+                        }`}
+                      >
                         <div className="prose prose-sm max-w-none prose-slate dark:prose-invert prose-p:my-3 prose-li:my-2 prose-ul:my-3 prose-ol:my-3 prose-headings:mt-4">
                           <ReactMarkdown>{message.content}</ReactMarkdown>
                         </div>
@@ -176,7 +204,7 @@ export const ChatInterface = () => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
                   placeholder="Ask me anything..."
                   className="w-full pl-6 pr-14 py-4 bg-white border border-slate-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-600/5 focus:border-indigo-600 transition-all shadow-sm"
                 />

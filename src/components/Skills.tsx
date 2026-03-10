@@ -1,6 +1,6 @@
-import React from 'react';
-import { Sparkles, Code2, Terminal, Cpu } from 'lucide-react';
-import { SkillBadge } from './SkillBadge';
+"use client";
+import React from "react";
+import { Sparkles, Code2, Terminal, Cpu } from "lucide-react";
 
 interface SkillsData {
   ai_llm: string[];
@@ -16,14 +16,22 @@ interface SkillsProps {
 
 export const Skills: React.FC<SkillsProps> = ({ skills }) => {
   return (
-    <section id="skills" className="max-w-7xl mx-auto px-6 mb-[68px] md:mb-[84px] scroll-mt-32 md:scroll-mt-40">
+    <section
+      id="skills"
+      className="max-w-7xl mx-auto px-6 mb-[68px] md:mb-[84px] scroll-mt-32 md:scroll-mt-40"
+    >
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">Expertise</h2>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter">TECHNICAL ARSENAL.</h3>
+          <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">
+            Expertise
+          </h2>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter">
+            TECHNICAL ARSENAL.
+          </h3>
         </div>
         <p className="text-slate-500 font-medium max-w-sm">
-          Specialized in building scalable, performant, and accessible web applications using modern technologies.
+          Specialized in building scalable, performant, and accessible web
+          applications using modern technologies.
         </p>
       </div>
 
@@ -36,7 +44,10 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
             <h4 className="text-3xl font-bold mb-4">AI & LLM Expertise</h4>
             <div className="flex flex-wrap gap-2">
               {skills.ai_llm.map((skill: string) => (
-                <span key={skill} className="px-3 py-1 bg-white/10 rounded-full text-xs font-bold border border-white/20">
+                <span
+                  key={skill}
+                  className="px-3 py-1 bg-white/10 rounded-full text-xs font-bold border border-white/20"
+                >
                   {skill}
                 </span>
               ))}
@@ -51,11 +62,18 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               <Code2 className="w-6 h-6 text-white" />
             </div>
             <h4 className="text-2xl font-bold mb-2">Frontend</h4>
-            <p className="text-sm text-slate-500 font-medium mb-6">Modern React 19 & Next.js architectures.</p>
+            <p className="text-sm text-slate-500 font-medium mb-6">
+              Modern React 19 & Next.js architectures.
+            </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {skills.frontend.slice(0, 4).map((skill: string) => (
-              <span key={skill} className="text-xs font-black text-indigo-600 uppercase tracking-widest">{skill}</span>
+              <span
+                key={skill}
+                className="text-xs font-black text-indigo-600 uppercase tracking-widest"
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>
@@ -66,11 +84,18 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               <Terminal className="w-6 h-6 text-white" />
             </div>
             <h4 className="text-2xl font-bold mb-2">Backend & Cloud</h4>
-            <p className="text-sm text-slate-500 font-medium mb-6">Node.js, AWS & Docker deployments.</p>
+            <p className="text-sm text-slate-500 font-medium mb-6">
+              Node.js, AWS & Docker deployments.
+            </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {skills.backend_cloud.slice(0, 5).map((skill: string) => (
-              <span key={skill} className="text-xs font-black text-emerald-600 uppercase tracking-widest">{skill}</span>
+              <span
+                key={skill}
+                className="text-xs font-black text-emerald-600 uppercase tracking-widest"
+              >
+                {skill}
+              </span>
             ))}
           </div>
         </div>
@@ -83,7 +108,9 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               </div>
               <div>
                 <h5 className="font-bold text-slate-900">{item}</h5>
-                <p className="text-xs text-slate-500 mt-1">Ensuring production-grade reliability.</p>
+                <p className="text-xs text-slate-500 mt-1">
+                  Ensuring production-grade reliability.
+                </p>
               </div>
             </div>
           ))}

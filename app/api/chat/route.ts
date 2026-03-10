@@ -1,26 +1,27 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
-import { portfolioData } from "../data/portfolio";
+import { portfolioData } from "../../../src/data/portfolio";
 
-const viteApiKey =
-  typeof import.meta !== "undefined"
-    ? (import.meta as unknown as { env?: Record<string, string> }).env
-        ?.VITE_GEMINI_API_KEY
-    : undefined;
+export async function POST(req: Request) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return new Response("Missing GEMINI_API_KEY", { status: 500 });
+  }
 
-export async function getChatResponseStream(
-  message: string,
-  history: { role: "user" | "model"; parts: { text: string }[] }[],
-  onChunk: (chunk: string) => void,
-) {
-  if (viteApiKey) {
-    const genAI = new GoogleGenAI({ apiKey: viteApiKey });
+  const body = await req.json();
+  const message = body?.message;
+  const history = Array.isArray(body?.history) ? body.history : [];
 
-    const chat = genAI.chats.create({
-      model: "gemini-3-flash-preview",
-      config: {
-        systemInstruction:
-          portfolioData.system_prompt +
-          `
+  if (typeof message !== "string" || message.trim().length === 0) {
+    return new Response("Invalid message", { status: 400 });
+  }
+
+  const genAI = new GoogleGenAI({ apiKey });
+  const chat = genAI.chats.create({
+    model: "gemini-3-flash-preview",
+    config: {
+      systemInstruction:
+        portfolioData.system_prompt +
+        `
         You are the AI assistant representing Krishnaraj, a senior software engineer. 
         Your goal is to communicate his expertise with clarity, authority, and measurable impact.
 
@@ -69,58 +70,34 @@ export async function getChatResponseStream(
         If the question is unrelated to Krishnaraj's work:
         - Politely redirect toward his professional expertise.
         `,
-      },
-      history: history.map((h) => ({
+    },
+    history: history.map(
+      (h: { role: "user" | "model"; parts: { text: string }[] }) => ({
         role: h.role,
         parts: h.parts,
-      })),
-    });
+      }),
+    ),
+  });
 
-    try {
-      const streamResponse = await chat.sendMessageStream({ message });
-      for await (const chunk of streamResponse) {
-        const c = chunk as GenerateContentResponse;
-        if (c.text) {
-          onChunk(c.text);
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        const responseStream = await chat.sendMessageStream({ message });
+        const encoder = new TextEncoder();
+        for await (const chunk of responseStream) {
+          const c = chunk as GenerateContentResponse;
+          if (c.text) {
+            controller.enqueue(encoder.encode(c.text));
+          }
         }
+        controller.close();
+      } catch (error) {
+        controller.error(error);
       }
-    } catch (error) {
-      console.error("Gemini Error:", error);
-      onChunk(
-        "I encountered an error while processing your request. Please try again.",
-      );
-    }
-    return;
-  }
+    },
+  });
 
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, history }),
-    });
-
-    if (!response.ok || !response.body) {
-      onChunk(
-        "I'm sorry, the AI assistant is currently unavailable. Please check back later.",
-      );
-      return;
-    }
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
-    while (!done) {
-      const result = await reader.read();
-      done = result.done;
-      if (result.value) {
-        onChunk(decoder.decode(result.value, { stream: !done }));
-      }
-    }
-  } catch (error) {
-    console.error("Gemini Error:", error);
-    onChunk(
-      "I encountered an error while processing your request. Please try again.",
-    );
-  }
+  return new Response(stream, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
 }

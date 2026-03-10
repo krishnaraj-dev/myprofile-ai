@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React from "react";
 
 interface ExperienceCardProps {
   company: string;
@@ -7,7 +8,12 @@ interface ExperienceCardProps {
   highlights: string[];
 }
 
-export const ExperienceCard: React.FC<ExperienceCardProps> = ({ company, role, duration, highlights }) => {
+export const ExperienceCard: React.FC<ExperienceCardProps> = ({
+  company,
+  role,
+  duration,
+  highlights,
+}) => {
   return (
     <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-4">
