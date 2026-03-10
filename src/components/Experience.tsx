@@ -8,12 +8,12 @@ interface ExperienceProps {
 
 export const Experience: React.FC<ExperienceProps> = ({ experience }) => {
   return (
-    <section id="experience" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <section id="experience" className="max-w-7xl mx-auto px-6 mb-[68px] md:mb-[84px] scroll-mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <div className="lg:col-span-4">
           <div className="sticky top-32">
-            <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-4">Journey</h2>
-            <h3 className="text-5xl font-black tracking-tighter mb-6 text-slate-900">PROFESSIONAL <br /> EVOLUTION.</h3>
+            <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">Journey</h2>
+            <h3 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 text-slate-900">PROFESSIONAL <br /> EVOLUTION.</h3>
             <p className="text-slate-500 font-medium">
               11+ years of experience in leading engineering teams and delivering enterprise-grade software.
             </p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, ArrowUpRight, Linkedin, Github } from 'lucide-react';
+import { Mail, ArrowRight, Github, Linkedin, Terminal } from 'lucide-react';
 
 interface HeroProps {
   developer_profile: any;
@@ -9,69 +9,107 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-6 py-20 scroll-mt-20">
-      <div className="relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    <section id="about" className="max-w-7xl mx-auto px-6 pt-40 pb-[84px] md:pt-44 md:pb-[100px] scroll-mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="lg:col-span-7 flex flex-col items-start"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm">
-            <Sparkles className="w-3 h-3 text-amber-500" />
-            Available for new opportunities
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest mb-4 shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+            </span>
+            Available for hire
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] mb-10 text-slate-950">
-            CRAFTING <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">DIGITAL</span> <br />
-            FUTURE.
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.1] mb-4">
+            Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">digital</span> <br />
+            experiences.
           </h1>
+          
+          <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mb-6">
+            Hi, I'm {developer_profile.name}. A {developer_profile.title} with {developer_profile.experience_years} years of experience architecting high-impact, scalable web solutions and specializing in modern frontend and AI integrations.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <a 
+              href={`mailto:${contact.email}`} 
+              className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-base flex items-center justify-center gap-2 hover:bg-indigo-600 transition-all shadow-lg shadow-slate-200 hover:shadow-indigo-200 group"
+            >
+              <Mail className="w-5 h-5" />
+              <span>Let's collaborate</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-center">
+              <a 
+                href={`https://${contact.linkedin}`} 
+                target="_blank" 
+                className="w-12 h-12 bg-white border border-slate-200 rounded-2xl flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all shadow-sm"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://github.com/krishnaraj-dev" 
+                target="_blank" 
+                className="w-12 h-12 bg-white border border-slate-200 rounded-2xl flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all shadow-sm"
+                aria-label="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-10">
-              <p className="text-xl md:text-2xl text-slate-600 font-medium leading-relaxed max-w-xl">
-                I'm {developer_profile.name}, a {developer_profile.title} with {developer_profile.experience_years} years of experience architecting high-impact, scalable web solutions.
-              </p>
-              <div className="flex flex-wrap gap-6">
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-slate-950">11+</span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Years Exp</span>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="lg:col-span-5 relative mt-8 lg:mt-0"
+        >
+          <div className="relative w-full aspect-[4/3] max-w-sm mx-auto">
+            {/* Decorative background elements */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100 to-blue-50 rounded-[3rem] rotate-6 scale-105 -z-10 transition-transform hover:rotate-12 duration-500"></div>
+            <div className="absolute inset-0 bg-white border border-slate-200 rounded-[3rem] shadow-xl overflow-hidden flex items-center justify-center group">
+              {/* Placeholder for profile image - using a stylized terminal/code block for now */}
+              <div className="w-full h-full bg-slate-50 p-8 flex flex-col">
+                <div className="flex gap-2 mb-6">
+                  <div className="w-3 h-3 rounded-full bg-rose-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
                 </div>
-                <div className="w-px h-12 bg-slate-200" />
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-slate-950">40+</span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Projects</span>
-                </div>
-                <div className="w-px h-12 bg-slate-200" />
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-slate-950">100%</span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Delivery</span>
+                <div className="flex-1 flex flex-col justify-center">
+                  <Terminal className="w-12 h-12 text-indigo-300 mb-6" />
+                  <div className="space-y-3 font-mono text-sm">
+                    <p className="text-slate-400"><span className="text-indigo-500">const</span> <span className="text-blue-500">developer</span> = {'{'}</p>
+                    <p className="text-slate-600 pl-4">name: <span className="text-emerald-500">'{developer_profile.name}'</span>,</p>
+                    <p className="text-slate-600 pl-4">role: <span className="text-emerald-500">'{developer_profile.title}'</span>,</p>
+                    <p className="text-slate-600 pl-4">experience: <span className="text-amber-500">{developer_profile.experience_years}</span>,</p>
+                    <p className="text-slate-600 pl-4">passion: <span className="text-emerald-500">'Building great products'</span></p>
+                    <p className="text-slate-400">{'}'};</p>
+                  </div>
                 </div>
               </div>
             </div>
             
-            <div className="flex flex-col gap-6">
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50">
-                <p className="text-slate-700 leading-relaxed font-medium">
-                  {developer_profile.summary}
-                </p>
+            {/* Floating badge */}
+            <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl border border-slate-100 shadow-xl flex items-center gap-4 animate-bounce-slow">
+              <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                <span className="text-xl font-black text-indigo-600">40+</span>
               </div>
-              <div className="flex gap-4">
-                <a href={`mailto:${contact.email}`} className="flex-1 py-4 bg-slate-950 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-800 transition-all group shadow-lg shadow-slate-300">
-                  Get in touch <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </a>
-                <div className="flex gap-2">
-                   <a href={`https://${contact.linkedin}`} target="_blank" className="w-14 h-14 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-200 transition-all shadow-sm">
-                     <Linkedin className="w-5 h-5" />
-                   </a>
-                   <a href="https://github.com/krishnaraj-dev" target="_blank" className="w-14 h-14 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-200 transition-all shadow-sm">
-                     <Github className="w-5 h-5" />
-                   </a>
-                </div>
+              <div>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Projects</p>
+                <p className="text-sm font-bold text-slate-900">Completed</p>
               </div>
             </div>
           </div>
         </motion.div>
+        
       </div>
     </section>
   );

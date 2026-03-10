@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
@@ -8,73 +8,88 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3"
-        >
-          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200">
-            <span className="text-white font-bold text-lg">K</span>
-          </div>
-          <span className="font-bold text-xl tracking-tight uppercase">Krishnaraj</span>
-        </motion.div>
-        
-        <nav className="hidden md:flex items-center gap-8">
-          {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
-            <a 
-              key={item}
-              href={`#${item.toLowerCase()}`} 
-              className="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-all hover:tracking-widest"
-            >
-              {item}
-            </a>
-          ))}
-          <a 
-            href="#contact" 
-            className="px-6 py-2.5 bg-indigo-600 text-white rounded-full text-sm font-bold hover:bg-indigo-700 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-indigo-200"
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-[30px]`}>
+      <div className="max-w-5xl mx-auto px-6">
+        <div className={`flex items-center justify-between rounded-full transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-slate-200/50 border border-slate-200/50 px-6 py-3' : 'bg-transparent px-2 py-2'}`}>
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-3"
           >
-            Hire Me
-          </a>
-        </nav>
+            <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center shadow-md shadow-indigo-200">
+              <span className="text-white font-bold text-lg">K</span>
+            </div>
+            <span className="font-bold text-lg tracking-tight text-slate-900 hidden sm:block">Krishnaraj</span>
+          </motion.div>
+          
+          <nav className="hidden md:flex items-center gap-1 bg-slate-100/50 p-1 rounded-full border border-slate-200/50">
+            {['About', 'Skills', 'Projects', 'Experience'].map((item) => (
+              <a 
+                key={item}
+                href={`#${item.toLowerCase()}`} 
+                className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-white rounded-full transition-all"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden p-2 text-slate-600"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.nav 
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          className="md:hidden bg-white border-b border-slate-200 px-6 py-8 flex flex-col gap-6"
-        >
-          {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
+          <div className="hidden md:block">
             <a 
-              key={item}
-              href={`#${item.toLowerCase()}`} 
-              className="text-lg font-bold text-slate-900"
+              href="#contact" 
+              className="px-6 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-indigo-600 transition-all shadow-sm"
+            >
+              Let's Talk
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2 text-slate-600 bg-slate-100 rounded-full"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.nav 
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            className="md:hidden absolute top-full left-6 right-6 mt-4 bg-white rounded-3xl shadow-xl border border-slate-200 p-6 flex flex-col gap-4"
+          >
+            {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
+              <a 
+                key={item}
+                href={`#${item.toLowerCase()}`} 
+                className="text-lg font-bold text-slate-900 px-4 py-3 hover:bg-slate-50 rounded-xl transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+            <a 
+              href="#contact" 
+              className="mt-2 px-6 py-4 bg-indigo-600 text-white rounded-xl text-center font-bold"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {item}
+              Let's Talk
             </a>
-          ))}
-          <a 
-            href="#contact" 
-            className="px-6 py-4 bg-indigo-600 text-white rounded-2xl text-center font-bold"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Hire Me
-          </a>
-        </motion.nav>
-      )}
+          </motion.nav>
+        )}
+      </div>
     </header>
   );
 };

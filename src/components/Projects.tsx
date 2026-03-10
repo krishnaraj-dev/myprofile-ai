@@ -10,11 +10,11 @@ interface ProjectsProps {
 
 export const Projects: React.FC<ProjectsProps> = ({ projects, visibleProjects, showMoreProjects }) => {
   return (
-    <section id="projects" className="max-w-7xl mx-auto px-6 mb-32 scroll-mt-20">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+    <section id="projects" className="max-w-7xl mx-auto px-6 mb-[68px] md:mb-[84px] scroll-mt-20">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-4">Portfolio</h2>
-          <h3 className="text-5xl font-black tracking-tighter">FEATURED PROJECTS.</h3>
+          <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">Portfolio</h2>
+          <h3 className="text-4xl md:text-5xl font-black tracking-tighter">FEATURED PROJECTS.</h3>
         </div>
         <p className="text-slate-500 font-medium max-w-sm">
           A selection of technical implementations and open-source contributions.

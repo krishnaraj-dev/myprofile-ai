@@ -48,7 +48,7 @@ export default function PortfolioPage() {
 
       <Header isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
-      <main className="pt-32 pb-20">
+      <main className="pb-20">
         <Hero developer_profile={developer_profile} contact={contact} />
         <Skills skills={skills} />
         <Projects projects={portfolioData.projects} visibleProjects={visibleProjects} showMoreProjects={showMoreProjects} />

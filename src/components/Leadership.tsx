@@ -7,11 +7,11 @@ interface LeadershipProps {
 
 export const Leadership: React.FC<LeadershipProps> = ({ leadership }) => {
   return (
-    <section className="max-w-7xl mx-auto px-6 mb-32">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <section className="max-w-7xl mx-auto px-6 mb-[68px] md:mb-[84px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <div className="lg:col-span-4">
-          <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-4">Leadership</h2>
-          <h3 className="text-5xl font-black tracking-tighter mb-6 text-slate-900">ENGINEERING <br /> GOVERNANCE.</h3>
+          <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">Leadership</h2>
+          <h3 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 text-slate-900">ENGINEERING <br /> GOVERNANCE.</h3>
           <p className="text-slate-500 font-medium">
             Driving excellence through mentorship, architectural oversight, and strategic technical planning.
           </p>
