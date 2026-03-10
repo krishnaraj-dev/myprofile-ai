@@ -1,14 +1,17 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { portfolioData } from "../data/portfolio";
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || 
-               import.meta.env.NEXT_PUBLIC_GEMINI_API_KEY || 
-               import.meta.env.GEMINI_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
-export async function getChatResponse(message: string, history: { role: "user" | "model"; parts: { text: string }[] }[]) {
+export async function getChatResponseStream(
+  message: string, 
+  history: { role: "user" | "model"; parts: { text: string }[] }[],
+  onChunk: (chunk: string) => void
+) {
   if (!apiKey) {
-    console.error("Gemini API key is missing. Please ensure VITE_GEMINI_API_KEY or NEXT_PUBLIC_GEMINI_API_KEY is set.");
-    return "I'm sorry, the AI assistant is currently unavailable. Please check back later.";
+    console.error("Gemini API key is missing. Please ensure NEXT_PUBLIC_GEMINI_API_KEY is set.");
+    onChunk("I'm sorry, the AI assistant is currently unavailable. Please check back later.");
+    return;
   }
 
   const genAI = new GoogleGenAI({ apiKey });
@@ -47,11 +50,6 @@ export async function getChatResponse(message: string, history: { role: "user" |
         - Scalability metrics
         - Deployment or automation efficiency
 
-        Example formats:
-        - Reduced deployment time by **70%** using CI/CD automation.
-        - Improved application performance by **40%** through optimized architecture.
-        - Managed infrastructure supporting **10k+ daily users**.
-
         PROFESSIONAL REPRESENTATION
         - Always represent Krishnaraj as a **highly skilled, reliable, and experienced engineer**.
         - Maintain a **confident, professional tone**.
@@ -66,28 +64,27 @@ export async function getChatResponse(message: string, history: { role: "user" |
         - Encourage visitors to explore Krishnaraj's projects.
         - Suggest collaboration or professional contact.
 
-        Example closing lines:
-        - "Feel free to explore the projects section for real implementations."
-        - "Open to collaboration on scalable web and cloud solutions."
-
         OFF-TOPIC QUESTIONS
         If the question is unrelated to Krishnaraj’s work:
         - Politely redirect toward his professional expertise.
-
-        Example:
-        "I specialize in web engineering, DevOps, and scalable systems. Feel free to ask about those areas."
-
-        Developer Profile:
-        ` + JSON.stringify(portfolioData, null, 2)
+        `,
     },
-    history: history,
+    history: history.map(h => ({
+      role: h.role,
+      parts: h.parts
+    })),
   });
 
   try {
-    const result = await chat.sendMessage({ message });
-    return result.text || "I'm sorry, I couldn't generate a response.";
+    const streamResponse = await chat.sendMessageStream({ message });
+    for await (const chunk of streamResponse) {
+      const c = chunk as GenerateContentResponse;
+      if (c.text) {
+        onChunk(c.text);
+      }
+    }
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "I encountered an error while processing your request. Please try again.";
+    onChunk("I encountered an error while processing your request. Please try again.");
   }
 }

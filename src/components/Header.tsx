@@ -26,6 +26,7 @@ export const Header: React.FC = () => {
               { name: 'About', href: '#about' },
               { name: 'Skills', href: '#skills' },
               { name: 'Projects', href: '#projects' },
+              { name: 'Articles', href: '#articles' },
               { name: 'Experience', href: '#experience' },
               { name: 'Career Path', href: '#career-path' }
             ].map((item) => (
@@ -69,6 +70,7 @@ export const Header: React.FC = () => {
               { name: 'About', href: '#about' },
               { name: 'Skills', href: '#skills' },
               { name: 'Projects', href: '#projects' },
+              { name: 'Articles', href: '#articles' },
               { name: 'Experience', href: '#experience' },
               { name: 'Career Path', href: '#career-path' },
               { name: 'Contact', href: '#contact' }

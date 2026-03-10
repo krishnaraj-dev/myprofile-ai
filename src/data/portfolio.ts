@@ -206,10 +206,10 @@ export const portfolioData = {
     "title": "Technical Architect",
     "description": "Transitioning from Lead Software Engineer to Technical Architect. My focus is on enterprise system design, scalable cloud infrastructure, and cross-functional technical leadership.",
     "milestones": [
-      { "name": "System Design & Architecture", "progress": 90 },
-      { "name": "Cloud & Infrastructure (AWS/GCP)", "progress": 80 },
-      { "name": "Enterprise Security & Compliance", "progress": 85 },
-      { "name": "Cross-functional Leadership", "progress": 95 }
+      { "name": "System Design & Architecture", "progress": 90, "completed": ["Micro-frontend architecture", "Design system standardization"], "in_progress": ["Event-driven system design"] },
+      { "name": "Cloud & Infrastructure (AWS/GCP)", "progress": 80, "completed": ["CI/CD pipeline automation", "S3/CloudFront optimization"], "in_progress": ["Kubernetes orchestration"] },
+      { "name": "Enterprise Security & Compliance", "progress": 85, "completed": ["RBAC implementation", "OAuth2/JWT integration"], "in_progress": ["Advanced threat modeling"] },
+      { "name": "Cross-functional Leadership", "progress": 95, "completed": ["Engineering team mentorship", "Technical hiring strategy"], "in_progress": ["Cross-departmental architectural governance"] }
     ]
   },
   "contact": {
@@ -219,6 +219,32 @@ export const portfolioData = {
     "portfolio": "myprofile-dev.vercel.app/portfolio",
     "call_to_action": "Interested in adding a high-performance, AI-accelerated engineer to your team? Let's connect."
   },
+  "articles": [
+    {
+      "title": "Engineering Culture at Scale: Beyond the Code",
+      "category": "Leadership",
+      "summary": "An exploration of fostering high-performance engineering cultures in distributed teams. Focuses on psychological safety, autonomous decision-making, and aligning technical goals with business outcomes.",
+      "link": "#"
+    },
+    {
+      "title": "Mentorship as a Force Multiplier",
+      "category": "Leadership",
+      "summary": "Moving beyond traditional mentorship to create sustainable growth loops. Strategies for identifying high-potential talent and scaling technical leadership through effective delegation.",
+      "link": "#"
+    },
+    {
+      "title": "Event-Driven Microservices: Patterns and Pitfalls",
+      "category": "Tech Arch",
+      "summary": "A deep dive into implementing robust event-driven architectures. Discusses eventual consistency, distributed tracing, and handling complex failure modes in asynchronous systems.",
+      "link": "#"
+    },
+    {
+      "title": "Advanced Caching Strategies for High-Traffic Systems",
+      "category": "Tech Arch",
+      "summary": "Optimizing performance for enterprise-grade platforms. Covers multi-layer caching, cache invalidation strategies, and leveraging edge computing for low-latency data delivery.",
+      "link": "#"
+    }
+  ],
   "languages": [
     "English",
     "Tamil",

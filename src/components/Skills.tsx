@@ -2,8 +2,16 @@ import React from 'react';
 import { Sparkles, Code2, Terminal, Cpu } from 'lucide-react';
 import { SkillBadge } from './SkillBadge';
 
+interface SkillsData {
+  ai_llm: string[];
+  frontend: string[];
+  state_data: string[];
+  backend_cloud: string[];
+  testing_quality: string[];
+}
+
 interface SkillsProps {
-  skills: any;
+  skills: SkillsData;
 }
 
 export const Skills: React.FC<SkillsProps> = ({ skills }) => {

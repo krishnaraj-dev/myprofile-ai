@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Loader2, Sparkles, MessageSquare, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
-import { getChatResponse } from '../lib/gemini';
+import { getChatResponseStream } from '../lib/gemini';
 import { portfolioData } from '../data/portfolio';
 
 interface Message {
@@ -45,8 +45,18 @@ export const ChatInterface = () => {
       parts: [{ text: m.content }]
     }));
 
-    const response = await getChatResponse(userMessage, history);
-    setMessages(prev => [...prev, { role: 'model', content: response }]);
+    let fullResponse = '';
+    setMessages(prev => [...prev, { role: 'model', content: '' }]);
+
+    await getChatResponseStream(userMessage, history, (chunk) => {
+      fullResponse += chunk;
+      setMessages(prev => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1].content = fullResponse;
+        return newMessages;
+      });
+    });
+    
     setIsLoading(false);
   };
 

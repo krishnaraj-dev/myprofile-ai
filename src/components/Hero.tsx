@@ -2,9 +2,25 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, ArrowRight, Github, Linkedin, Terminal } from 'lucide-react';
 
+interface DeveloperProfile {
+  name: string;
+  title: string;
+  location: string;
+  experience_years: number;
+  summary: string;
+}
+
+interface Contact {
+  email: string;
+  phone: string;
+  linkedin: string;
+  portfolio: string;
+  call_to_action: string;
+}
+
 interface HeroProps {
-  developer_profile: any;
-  contact: any;
+  developer_profile: DeveloperProfile;
+  contact: Contact;
 }
 
 export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {

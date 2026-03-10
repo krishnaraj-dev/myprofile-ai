@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 
+interface ExperienceItem {
+  company: string;
+  role: string;
+  duration: string;
+  location?: string;
+  highlights: string[];
+}
+
 interface ExperienceProps {
-  experience: any[];
+  experience: ExperienceItem[];
 }
 
 export const Experience: React.FC<ExperienceProps> = ({ experience }) => {

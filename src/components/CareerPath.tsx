@@ -2,11 +2,18 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Target, Cloud, Shield, Users } from 'lucide-react';
 
+interface Milestone { 
+  name: string; 
+  progress: number; 
+  completed?: string[]; 
+  in_progress?: string[]; 
+}
+
 interface CareerPathProps {
   careerPath: {
     title: string;
     description: string;
-    milestones: { name: string; progress: number }[];
+    milestones: Milestone[];
   };
 }
 
@@ -50,10 +57,28 @@ export const CareerPath: React.FC<CareerPathProps> = ({ careerPath }) => {
                 </div>
                 <h4 className="font-bold text-slate-900 text-lg">{milestone.name}</h4>
               </div>
-              <div className="w-full bg-slate-100 rounded-full h-2">
+              <div className="w-full bg-slate-100 rounded-full h-2 mb-4">
                 <div className="bg-indigo-600 h-2 rounded-full" style={{ width: `${milestone.progress}%` }}></div>
               </div>
-              <p className="text-xs text-slate-500 mt-2 font-bold">{milestone.progress}% Progress</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                {milestone.completed && (
+                  <div>
+                    <p className="font-black text-emerald-600 uppercase tracking-widest mb-2">Completed</p>
+                    <ul className="list-disc list-inside text-slate-600 font-medium space-y-1">
+                      {milestone.completed.map((item, idx) => <li key={idx}>{item}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {milestone.in_progress && (
+                  <div>
+                    <p className="font-black text-amber-600 uppercase tracking-widest mb-2">In Progress</p>
+                    <ul className="list-disc list-inside text-slate-600 font-medium space-y-1">
+                      {milestone.in_progress.map((item, idx) => <li key={idx}>{item}</li>)}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           </motion.div>
         ))}

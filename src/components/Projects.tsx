@@ -1,14 +1,23 @@
 'use client';
 import React, { useMemo } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Code2, ExternalLink, ChevronDown, X } from 'lucide-react';
 import { useAppStore } from '../store/useStore';
 
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  impact?: string;
+  link: string;
+}
+
 interface ProjectsProps {
-  projects: any[];
+  projects: Project[];
 }
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
+  const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
   const [selectedTech, setSelectedTech] = React.useState<string[]>([]);
   const { visibleProjects, showMoreProjects } = useAppStore();
 
@@ -106,42 +115,92 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
             viewport={{ once: true, margin: "-50px" }}
             whileHover={{ y: -5, scale: 1.02 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="group p-8 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-indigo-100 transition-all"
+            onClick={() => setSelectedProject(project)}
+            className="group p-8 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-indigo-100 transition-all cursor-pointer"
           >
             <div className="flex justify-between items-start mb-6">
               <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                 <Code2 className="w-6 h-6" aria-hidden="true" />
               </div>
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label={`View project: ${project.title}`}
-                className="p-2 text-slate-400 hover:text-indigo-600 transition-colors"
-              >
+              <div className="p-2 text-slate-400 group-hover:text-indigo-600 transition-colors">
                 <ExternalLink className="w-5 h-5" />
-              </a>
+              </div>
             </div>
             <h4 className="text-2xl font-bold mb-3 text-slate-900">{project.title}</h4>
-            <p className="text-slate-500 text-sm leading-relaxed mb-4 font-medium">
+            <p className="text-slate-500 text-sm leading-relaxed mb-4 font-medium line-clamp-3">
               {project.description}
             </p>
             {project.impact && (
               <div className="mb-6 p-3 bg-indigo-50 rounded-xl border border-indigo-100">
                 <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-1">Impact</p>
-                <p className="text-xs text-slate-600 font-bold leading-tight">{project.impact}</p>
+                <p className="text-xs text-slate-600 font-bold leading-tight line-clamp-2">{project.impact}</p>
               </div>
             )}
             <div className="flex flex-wrap gap-2">
-              {project.tech.map((t: string) => (
+              {project.tech?.slice(0, 3).map((t: string) => (
                 <span key={t} className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border ${selectedTech.includes(t) ? 'bg-indigo-100 text-indigo-700 border-indigo-200' : 'bg-slate-50 text-slate-500 border-slate-100'}`}>
                   {t}
                 </span>
               ))}
+              {project.tech && project.tech.length > 3 && (
+                <span className="px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border bg-slate-50 text-slate-500 border-slate-100">
+                  +{project.tech.length - 3}
+                </span>
+              )}
             </div>
           </motion.div>
         ))}
       </div>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="relative w-full max-w-2xl bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl"
+            >
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-900 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <h3 className="text-3xl font-black text-slate-900 mb-6">{selectedProject.title}</h3>
+              <p className="text-slate-600 text-lg leading-relaxed mb-8">{selectedProject.description}</p>
+              {selectedProject.impact && (
+                <div className="mb-8 p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+                  <h4 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-3">Key Impact</h4>
+                  <p className="text-slate-700 font-medium">{selectedProject.impact}</p>
+                </div>
+              )}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {selectedProject.tech?.map((t: string) => (
+                  <span key={t} className="px-4 py-2 text-xs font-black uppercase tracking-widest rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <a 
+                href={selectedProject.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
+              >
+                Visit Project <ExternalLink className="w-4 h-4" />
+              </a>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {filteredProjects && visibleProjects < filteredProjects.length && (
         <div className="flex justify-center mt-16">
