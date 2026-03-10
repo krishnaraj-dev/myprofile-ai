@@ -52,12 +52,13 @@ export const ChatInterface = () => {
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
-    const history = [...messages, { role: "user", content: userMessage }].map(
-      (m) => ({
-        role: m.role,
-        parts: [{ text: m.content }],
-      }),
-    );
+    const history: { role: "user" | "model"; parts: { text: string }[] }[] = [
+      ...messages,
+      { role: "user", content: userMessage },
+    ].map((m) => ({
+      role: m.role,
+      parts: [{ text: m.content }],
+    }));
 
     let fullResponse = "";
     setMessages((prev) => [...prev, { role: "model", content: "" }]);
