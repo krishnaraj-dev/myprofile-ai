@@ -9,7 +9,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-6 pt-40 pb-[84px] md:pt-44 md:pb-[100px] scroll-mt-20">
+    <section id="about" className="max-w-7xl mx-auto px-6 pt-40 pb-[104px] md:pt-44 md:pb-[120px] scroll-mt-32 md:scroll-mt-40">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <motion.div 
@@ -72,23 +72,23 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           className="lg:col-span-5 relative mt-8 lg:mt-0"
         >
-          <div className="relative w-full aspect-[4/3] max-w-sm mx-auto">
+          <div className="relative w-full aspect-square max-w-sm mx-auto">
             {/* Decorative background elements */}
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100 to-blue-50 rounded-[3rem] rotate-6 scale-105 -z-10 transition-transform hover:rotate-12 duration-500"></div>
             <div className="absolute inset-0 bg-white border border-slate-200 rounded-[3rem] shadow-xl overflow-hidden flex items-center justify-center group">
               {/* Placeholder for profile image - using a stylized terminal/code block for now */}
-              <div className="w-full h-full bg-slate-50 p-8 flex flex-col">
-                <div className="flex gap-2 mb-6">
+              <div className="w-full h-full bg-slate-50 p-6 sm:p-8 flex flex-col">
+                <div className="flex gap-2 mb-4 sm:mb-6">
                   <div className="w-3 h-3 rounded-full bg-rose-400"></div>
                   <div className="w-3 h-3 rounded-full bg-amber-400"></div>
                   <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
                 </div>
                 <div className="flex-1 flex flex-col justify-center">
-                  <Terminal className="w-12 h-12 text-indigo-300 mb-6" />
-                  <div className="space-y-3 font-mono text-sm">
+                  <Terminal className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-300 mb-4" />
+                  <div className="space-y-2 font-mono text-xs sm:text-sm">
                     <p className="text-slate-400"><span className="text-indigo-500">const</span> <span className="text-blue-500">developer</span> = {'{'}</p>
                     <p className="text-slate-600 pl-4">name: <span className="text-emerald-500">'{developer_profile.name}'</span>,</p>
-                    <p className="text-slate-600 pl-4">role: <span className="text-emerald-500">'{developer_profile.title}'</span>,</p>
+                    <p className="text-slate-600 pl-4">role: <span className="text-emerald-500">'{developer_profile.title.split('|')[0].trim()}'</span>,</p>
                     <p className="text-slate-600 pl-4">experience: <span className="text-amber-500">{developer_profile.experience_years}</span>,</p>
                     <p className="text-slate-600 pl-4">passion: <span className="text-emerald-500">'Building great products'</span></p>
                     <p className="text-slate-400">{'}'};</p>
@@ -98,7 +98,7 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
             </div>
             
             {/* Floating badge */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl border border-slate-100 shadow-xl flex items-center gap-4 animate-bounce-slow">
+            <div className="absolute -bottom-6 -left-2 sm:-left-6 bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 shadow-xl flex items-center gap-3 sm:gap-4 animate-bounce-slow z-20">
               <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
                 <span className="text-xl font-black text-indigo-600">40+</span>
               </div>

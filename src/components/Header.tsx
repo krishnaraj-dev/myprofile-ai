@@ -8,20 +8,10 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-[30px]`}>
       <div className="max-w-5xl mx-auto px-6">
-        <div className={`flex items-center justify-between rounded-full transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-slate-200/50 border border-slate-200/50 px-6 py-3' : 'bg-transparent px-2 py-2'}`}>
+        <div className="flex items-center justify-between rounded-full transition-all duration-300 bg-white/90 backdrop-blur-xl shadow-lg shadow-slate-200/50 border border-slate-200/50 px-6 py-3">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}

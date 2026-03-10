@@ -6,7 +6,7 @@ interface ContactProps {
 
 export const Contact: React.FC<ContactProps> = ({ contact }) => {
   return (
-    <section id="contact" className="max-w-7xl mx-auto px-6 scroll-mt-20">
+    <section id="contact" className="max-w-7xl mx-auto px-6 scroll-mt-32 md:scroll-mt-40">
       <div className="relative p-12 md:p-24 bg-white rounded-[3rem] border border-slate-200 overflow-hidden text-center shadow-xl">
         <div className="relative z-10 max-w-2xl mx-auto">
           <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-6">Get in touch</h2>
