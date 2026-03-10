@@ -44,4 +44,8 @@ export default function PortfolioPage() {
     </div>
   );
 }
-const ChatContainer = lazy(() => import("./components/ChatContainer").then((m) => ({ default: m.ChatContainer })));
+const ChatContainer = lazy(() =>
+  import("./components/ChatContainer").then((m) => ({
+    default: m.ChatContainer,
+  })),
+);

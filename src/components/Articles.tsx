@@ -117,7 +117,7 @@ export const Articles: React.FC<ArticlesProps> = ({ articles }) => {
               onClick={() => setSelectedArticle(null)}
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             />
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
@@ -149,9 +149,9 @@ export const Articles: React.FC<ArticlesProps> = ({ articles }) => {
                   ))}
               </div>
               {selectedArticle.link !== "#" && (
-                <a 
-                  href={selectedArticle.link} 
-                  target="_blank" 
+                <a
+                  href={selectedArticle.link}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
                 >
