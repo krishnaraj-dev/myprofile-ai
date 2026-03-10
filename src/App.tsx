@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { portfolioData } from "./data/portfolio";
-import { ChatContainer } from "./components/ChatContainer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Skills } from "./components/Skills";
@@ -37,9 +36,12 @@ export default function PortfolioPage() {
         <Contact contact={contact} />
       </main>
 
-      <ChatContainer />
+      <Suspense fallback={null}>
+        <ChatContainer />
+      </Suspense>
 
       <Footer contact={contact} />
     </div>
   );
 }
+const ChatContainer = lazy(() => import("./components/ChatContainer").then((m) => ({ default: m.ChatContainer })));

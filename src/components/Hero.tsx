@@ -113,22 +113,22 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
                   <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
                 </div>
                 <div className="flex-1 flex flex-col justify-center">
-                  <Terminal className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-300 mb-4" />
+                  <Terminal className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-500 mb-4" />
                   <div className="space-y-2 font-mono text-xs sm:text-sm">
-                    <p className="text-slate-400">
-                      <span className="text-indigo-500">const</span>{" "}
-                      <span className="text-blue-500">developer</span> = {"{"}
+                    <p className="text-slate-600">
+                      <span className="text-indigo-700">const</span>{" "}
+                      <span className="text-blue-700">developer</span> = {"{"}
                     </p>
                     <p className="text-slate-600 pl-4">
                       name:{" "}
-                      <span className="text-emerald-500">
+                      <span className="text-emerald-700">
                         &apos;{developer_profile.name}&apos;
                       </span>
                       ,
                     </p>
                     <p className="text-slate-600 pl-4">
                       role:{" "}
-                      <span className="text-emerald-500">
+                      <span className="text-emerald-700">
                         &apos;{developer_profile.title.split("|")[0].trim()}
                         &apos;
                       </span>
@@ -136,18 +136,18 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
                     </p>
                     <p className="text-slate-600 pl-4">
                       experience:{" "}
-                      <span className="text-emerald-500">
+                      <span className="text-emerald-700">
                         &apos;{developer_profile.experience_years} years&apos;
                       </span>
                       ,
                     </p>
                     <p className="text-slate-600 pl-4">
                       passion:{" "}
-                      <span className="text-emerald-500">
+                      <span className="text-emerald-700">
                         &apos;Building great products&apos;
                       </span>
                     </p>
-                    <p className="text-slate-400">{"}"};</p>
+                    <p className="text-slate-600">{"}"};</p>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
                 <span className="text-xl font-black text-indigo-600">40+</span>
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                <p className="text-xs font-bold text-slate-600 uppercase tracking-wider">
                   Projects
                 </p>
                 <p className="text-sm font-bold text-slate-900">Completed</p>

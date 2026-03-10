@@ -92,7 +92,7 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
             {skills.backend_cloud.slice(0, 5).map((skill: string) => (
               <span
                 key={skill}
-                className="text-xs font-black text-emerald-600 uppercase tracking-widest"
+                className="text-xs font-black text-emerald-700 uppercase tracking-widest"
               >
                 {skill}
               </span>

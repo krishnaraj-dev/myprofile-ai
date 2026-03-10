@@ -307,6 +307,8 @@ export const portfolioData = {
       category: "Leadership",
       summary:
         "An exploration of fostering high-performance engineering cultures in distributed teams. Focuses on psychological safety, autonomous decision-making, and aligning technical goals with business outcomes.",
+      content:
+        "High-performing engineering cultures are built on trust, clarity, and repeatable decision-making. In distributed teams, psychological safety and shared context matter more than process rigor alone.\n\nI outline practical rituals that scale: decision logs, lightweight architecture reviews, and clear ownership boundaries. The focus is on keeping teams autonomous while aligning technical priorities with business outcomes.",
       link: "#",
     },
     {
@@ -314,6 +316,8 @@ export const portfolioData = {
       category: "Leadership",
       summary:
         "Moving beyond traditional mentorship to create sustainable growth loops. Strategies for identifying high-potential talent and scaling technical leadership through effective delegation.",
+      content:
+        "Mentorship works best when it compounds. The goal is not just skill transfer, but creating a repeatable system where new leaders can grow others.\n\nI cover identifying high-potential engineers, building growth plans, and delegating ownership that stretches capability without creating delivery risk. The outcome is a leadership pipeline that scales with the team.",
       link: "#",
     },
     {
@@ -321,6 +325,8 @@ export const portfolioData = {
       category: "Tech Arch",
       summary:
         "A deep dive into implementing robust event-driven architectures. Discusses eventual consistency, distributed tracing, and handling complex failure modes in asynchronous systems.",
+      content:
+        "Event-driven systems scale, but they are easy to get wrong. The real work is in contracts, tracing, and failure recovery, not just publishing events.\n\nThis article walks through safe message design, idempotency patterns, and tracing strategies that make asynchronous flows observable. It also covers common failure modes and how to prevent cascading retries.",
       link: "#",
     },
     {
@@ -328,6 +334,8 @@ export const portfolioData = {
       category: "Tech Arch",
       summary:
         "Optimizing performance for enterprise-grade platforms. Covers multi-layer caching, cache invalidation strategies, and leveraging edge computing for low-latency data delivery.",
+      content:
+        "Caching is not a feature, it is a system. Real performance gains come from layering strategies across CDN, application, and database tiers.\n\nI break down cache key design, invalidation patterns, and how to safely blend stale-while-revalidate with real-time data constraints. The goal is predictable latency under load.",
       link: "#",
     },
   ],

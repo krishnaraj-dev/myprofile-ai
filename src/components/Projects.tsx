@@ -133,9 +133,18 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                 <Code2 className="w-6 h-6" aria-hidden="true" />
               </div>
-              <div className="p-2 text-slate-400 group-hover:text-indigo-600 transition-colors">
-                <ExternalLink className="w-5 h-5" />
-              </div>
+              {project.link !== "#" && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-slate-400 group-hover:text-indigo-600 transition-colors"
+                  aria-label={`Open project: ${project.title}`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </a>
+              )}
             </div>
             <h4 className="text-2xl font-bold mb-3 text-slate-900">
               {project.title}

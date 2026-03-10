@@ -7,6 +7,7 @@ interface Article {
   title: string;
   category: string;
   summary: string;
+  content?: string;
   link: string;
 }
 
@@ -82,15 +83,18 @@ export const Articles: React.FC<ArticlesProps> = ({ articles }) => {
                     {article.category}
                   </span>
                 </div>
-                <a
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-indigo-600 transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </a>
+                {article.link !== "#" && (
+                  <a
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-400 hover:text-indigo-600 transition-colors"
+                    aria-label={`Open article: ${article.title}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
+                )}
               </div>
               <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
                 {article.title}
@@ -113,11 +117,11 @@ export const Articles: React.FC<ArticlesProps> = ({ articles }) => {
               onClick={() => setSelectedArticle(null)}
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             />
-            <motion.div
+            <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-full max-w-2xl bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl"
+              className="relative w-full max-w-4xl max-h-[85vh] overflow-y-auto bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl"
             >
               <button
                 onClick={() => setSelectedArticle(null)}
@@ -137,17 +141,23 @@ export const Articles: React.FC<ArticlesProps> = ({ articles }) => {
               <h3 className="text-3xl font-black text-slate-900 mb-4">
                 {selectedArticle.title}
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed mb-8">
-                {selectedArticle.summary}
-              </p>
-              <a
-                href={selectedArticle.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
-              >
-                Read Article <ExternalLink className="w-4 h-4" />
-              </a>
+              <div className="space-y-4 text-slate-600 text-lg leading-relaxed mb-8">
+                {(selectedArticle.content || selectedArticle.summary)
+                  .split("\n\n")
+                  .map((para) => (
+                    <p key={para}>{para}</p>
+                  ))}
+              </div>
+              {selectedArticle.link !== "#" && (
+                <a 
+                  href={selectedArticle.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
+                >
+                  Read Article <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
             </motion.div>
           </div>
         )}

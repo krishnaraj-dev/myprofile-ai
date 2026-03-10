@@ -65,8 +65,8 @@ export const Experience: React.FC<ExperienceProps> = ({ experience }) => {
                           </p>
                           {exp.location && (
                             <>
-                              <span className="text-slate-300 text-xs">•</span>
-                              <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">
+                              <span className="text-slate-500 text-xs">&bull;</span>
+                              <p className="text-slate-600 font-bold uppercase tracking-widest text-[10px]">
                                 {exp.location}
                               </p>
                             </>

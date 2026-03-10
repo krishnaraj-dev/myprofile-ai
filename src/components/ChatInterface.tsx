@@ -87,6 +87,7 @@ export const ChatInterface = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
+            aria-label="Open chat assistant"
             className="absolute bottom-0 right-0 w-14 h-14 bg-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-indigo-700 transition-colors group"
           >
             <MessageSquare className="w-6 h-6 group-hover:scale-110 transition-transform" />
