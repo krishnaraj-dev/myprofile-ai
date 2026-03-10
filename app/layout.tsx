@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import React from "react";
 import "../src/index.css";
 
@@ -53,7 +54,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-72WVNGJ78B"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-72WVNGJ78B', {
+              anonymize_ip: true,
+              allow_google_signals: false,
+              allow_ad_personalization_signals: false
+            });
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
