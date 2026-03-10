@@ -17,7 +17,7 @@ export const Experience: React.FC<ExperienceProps> = ({ experience }) => {
         <div className="lg:col-span-4">
           <div className="sticky top-32">
             <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">Journey</h2>
-            <h3 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 text-slate-900">PROFESSIONAL <br /> EVOLUTION.</h3>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mb-4 text-slate-900">PROFESSIONAL <br /> EVOLUTION.</h3>
             <p className="text-slate-500 font-medium">
               11+ years of experience in leading engineering teams and delivering enterprise-grade software.
             </p>

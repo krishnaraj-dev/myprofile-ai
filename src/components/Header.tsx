@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
+import { useAppStore } from '../store/useStore';
 
-interface HeaderProps {
-  isMobileMenuOpen: boolean;
-  setIsMobileMenuOpen: (open: boolean) => void;
-}
+export const Header: React.FC = () => {
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useAppStore();
 
-export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-[30px]`}>
       <div className="max-w-5xl mx-auto px-6">
@@ -24,13 +22,19 @@ export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setIsMobileMen
           </motion.div>
           
           <nav className="hidden md:flex items-center gap-1 bg-slate-100/50 p-1 rounded-full border border-slate-200/50">
-            {['About', 'Skills', 'Projects', 'Experience'].map((item) => (
+            {[
+              { name: 'About', href: '#about' },
+              { name: 'Skills', href: '#skills' },
+              { name: 'Projects', href: '#projects' },
+              { name: 'Experience', href: '#experience' },
+              { name: 'Career Path', href: '#career-path' }
+            ].map((item) => (
               <a 
-                key={item}
-                href={`#${item.toLowerCase()}`} 
+                key={item.name}
+                href={item.href} 
                 className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-white rounded-full transition-all"
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </nav>
@@ -48,6 +52,7 @@ export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setIsMobileMen
           <button 
             className="md:hidden p-2 text-slate-600 bg-slate-100 rounded-full"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -60,14 +65,21 @@ export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, setIsMobileMen
             animate={{ opacity: 1, y: 0, scale: 1 }}
             className="md:hidden absolute top-full left-6 right-6 mt-4 bg-white rounded-3xl shadow-xl border border-slate-200 p-6 flex flex-col gap-4"
           >
-            {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((item) => (
+            {[
+              { name: 'About', href: '#about' },
+              { name: 'Skills', href: '#skills' },
+              { name: 'Projects', href: '#projects' },
+              { name: 'Experience', href: '#experience' },
+              { name: 'Career Path', href: '#career-path' },
+              { name: 'Contact', href: '#contact' }
+            ].map((item) => (
               <a 
-                key={item}
-                href={`#${item.toLowerCase()}`} 
+                key={item.name}
+                href={item.href} 
                 className="text-lg font-bold text-slate-900 px-4 py-3 hover:bg-slate-50 rounded-xl transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {item}
+                {item.name}
               </a>
             ))}
             <a 

@@ -7,8 +7,8 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ contact }) => {
   return (
-    <footer className="border-t border-slate-200 bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
+    <footer className="border-t border-slate-200 bg-white py-8">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">K</span>
@@ -17,13 +17,13 @@ export const Footer: React.FC<FooterProps> = ({ contact }) => {
         </div>
         
         <div className="flex items-center gap-8">
-          <a href="https://github.com/krishnaraj-dev" target="_blank" className="text-slate-400 hover:text-indigo-600 transition-colors">
+          <a href="https://github.com/krishnaraj-dev" target="_blank" className="text-slate-400 hover:text-indigo-600 transition-colors" aria-label="GitHub">
             <Github className="w-6 h-6" />
           </a>
-          <a href={`https://${contact.linkedin}`} target="_blank" className="text-slate-400 hover:text-indigo-600 transition-colors">
+          <a href={`https://${contact.linkedin}`} target="_blank" className="text-slate-400 hover:text-indigo-600 transition-colors" aria-label="LinkedIn">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href={`mailto:${contact.email}`} className="text-slate-400 hover:text-indigo-600 transition-colors">
+          <a href={`mailto:${contact.email}`} className="text-slate-400 hover:text-indigo-600 transition-colors" aria-label="Email">
             <Mail className="w-6 h-6" />
           </a>
         </div>

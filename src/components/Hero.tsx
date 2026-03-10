@@ -23,15 +23,15 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
-            Available for hire
+            Open to Opportunities
           </div>
           
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.1] mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.1] mb-4">
             Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">digital</span> <br />
             experiences.
           </h1>
           
-          <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mb-6">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mb-6">
             Hi, I'm {developer_profile.name}. A {developer_profile.title} with {developer_profile.experience_years} years of experience architecting high-impact, scalable web solutions and specializing in modern frontend and AI integrations.
           </p>
           
@@ -69,8 +69,9 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="lg:col-span-5 relative mt-8 lg:mt-0"
+          className="lg:col-span-5 relative mt-8 lg:mt-0 cursor-pointer"
         >
           <div className="relative w-full aspect-square max-w-sm mx-auto">
             {/* Decorative background elements */}
@@ -89,7 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ developer_profile, contact }) => {
                     <p className="text-slate-400"><span className="text-indigo-500">const</span> <span className="text-blue-500">developer</span> = {'{'}</p>
                     <p className="text-slate-600 pl-4">name: <span className="text-emerald-500">'{developer_profile.name}'</span>,</p>
                     <p className="text-slate-600 pl-4">role: <span className="text-emerald-500">'{developer_profile.title.split('|')[0].trim()}'</span>,</p>
-                    <p className="text-slate-600 pl-4">experience: <span className="text-amber-500">{developer_profile.experience_years}</span>,</p>
+                    <p className="text-slate-600 pl-4">experience: <span className="text-emerald-500">'{developer_profile.experience_years} years'</span>,</p>
                     <p className="text-slate-600 pl-4">passion: <span className="text-emerald-500">'Building great products'</span></p>
                     <p className="text-slate-400">{'}'};</p>
                   </div>

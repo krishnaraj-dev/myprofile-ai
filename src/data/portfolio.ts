@@ -92,7 +92,6 @@ export const portfolioData = {
       "React 18/19",
       "Next.js (SSR, SSG, ISR)",
       "TypeScript (Strict Mode)",
-      "Tailwind CSS",
       "Storybook",
       "Turborepo (Monorepos)",
       "HeroUI / Antd / Material UI"
@@ -109,6 +108,8 @@ export const portfolioData = {
     "backend_cloud": [
       "Node.js",
       "Express.js",
+      "GraphQL",
+      "MongoDB",
       "RESTful APIs",
       "AWS (EC2, S3, IAM, CloudFront)",
       "Docker",
@@ -201,12 +202,22 @@ export const portfolioData = {
     "Scaled engineering organization 3x through technical hiring and evaluations",
     "Collaborated with Product, QA, and DevOps to ensure production stability and high availability"
   ],
+  "career_path": {
+    "title": "Technical Architect",
+    "description": "Transitioning from Lead Software Engineer to Technical Architect. My focus is on enterprise system design, scalable cloud infrastructure, and cross-functional technical leadership.",
+    "milestones": [
+      { "name": "System Design & Architecture", "progress": 90 },
+      { "name": "Cloud & Infrastructure (AWS/GCP)", "progress": 80 },
+      { "name": "Enterprise Security & Compliance", "progress": 85 },
+      { "name": "Cross-functional Leadership", "progress": 95 }
+    ]
+  },
   "contact": {
     "email": "krishnaraj.webdev@gmail.com",
     "phone": "8754666985",
     "linkedin": "linkedin.com/in/krishnaraj-dev",
     "portfolio": "myprofile-dev.vercel.app/portfolio",
-    "call_to_action": "Interested in building high-performance, AI-accelerated web platforms? Let's connect."
+    "call_to_action": "Interested in adding a high-performance, AI-accelerated engineer to your team? Let's connect."
   },
   "languages": [
     "English",

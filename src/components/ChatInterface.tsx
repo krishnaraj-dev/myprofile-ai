@@ -77,7 +77,7 @@ export const ChatInterface = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="flex flex-col h-[500px] md:h-[650px] bg-white/80 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden"
+            className="flex flex-col h-[calc(100vh-100px)] max-h-[500px] md:max-h-[650px] bg-white/80 backdrop-blur-2xl rounded-[2.5rem] border border-slate-200 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden"
           >
             {/* Header */}
             <div className="p-6 border-b border-slate-100 bg-white/50 flex items-center justify-between">

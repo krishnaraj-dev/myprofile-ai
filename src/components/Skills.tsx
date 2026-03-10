@@ -12,7 +12,7 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
           <h2 className="text-xs font-black text-indigo-600 uppercase tracking-[0.3em] mb-2">Expertise</h2>
-          <h3 className="text-4xl md:text-5xl font-black tracking-tighter">TECHNICAL ARSENAL.</h3>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter">TECHNICAL ARSENAL.</h3>
         </div>
         <p className="text-slate-500 font-medium max-w-sm">
           Specialized in building scalable, performant, and accessible web applications using modern technologies.
@@ -43,7 +43,7 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               <Code2 className="w-6 h-6 text-white" />
             </div>
             <h4 className="text-2xl font-bold mb-2">Frontend</h4>
-            <p className="text-sm text-slate-500 font-medium">Modern React 19 & Next.js architectures.</p>
+            <p className="text-sm text-slate-500 font-medium mb-6">Modern React 19 & Next.js architectures.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {skills.frontend.slice(0, 4).map((skill: string) => (
@@ -58,10 +58,10 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               <Terminal className="w-6 h-6 text-white" />
             </div>
             <h4 className="text-2xl font-bold mb-2">Backend & Cloud</h4>
-            <p className="text-sm text-slate-500 font-medium">Node.js, AWS & Docker deployments.</p>
+            <p className="text-sm text-slate-500 font-medium mb-6">Node.js, AWS & Docker deployments.</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {skills.backend_cloud.slice(0, 3).map((skill: string) => (
+            {skills.backend_cloud.slice(0, 5).map((skill: string) => (
               <span key={skill} className="text-xs font-black text-emerald-600 uppercase tracking-widest">{skill}</span>
             ))}
           </div>

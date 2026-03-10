@@ -29,32 +29,30 @@ import { Projects } from './components/Projects';
 import { Experience } from './components/Experience';
 import { Achievements } from './components/Achievements';
 import { Leadership } from './components/Leadership';
+import { CareerPath } from './components/CareerPath';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BackgroundEffect } from './components/BackgroundEffect';
+import { useAppStore } from './store/useStore';
 
 export default function PortfolioPage() {
   const { developer_profile, skills, experience, achievements, contact } = portfolioData;
-  const [visibleProjects, setVisibleProjects] = React.useState(6);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  
-  const showMoreProjects = () => {
-    setVisibleProjects(prev => prev + 6);
-  };
+  const { isMobileMenuOpen, setIsMobileMenuOpen, visibleProjects, showMoreProjects } = useAppStore();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-600 selection:text-white">
       <BackgroundEffect />
 
-      <Header isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
+      <Header />
 
-      <main className="pb-20">
+      <main className="pb-10">
         <Hero developer_profile={developer_profile} contact={contact} />
         <Skills skills={skills} />
-        <Projects projects={portfolioData.projects} visibleProjects={visibleProjects} showMoreProjects={showMoreProjects} />
+        <Projects projects={portfolioData.projects} />
         <Experience experience={experience} />
         <Achievements achievements={achievements} />
         <Leadership leadership={portfolioData.leadership} />
+        <CareerPath careerPath={portfolioData.career_path} />
         <Contact contact={contact} />
       </main>
 
