@@ -46,14 +46,14 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               {skills.ai_llm.map((skill: string) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 bg-white rounded-full text-xs font-bold border border-white text-indigo-700"
+                  className="px-3 py-1 bg-white rounded-full text-xs font-bold border border-white/80 text-indigo-900"
                 >
                   {skill}
                 </span>
               ))}
             </div>
           </div>
-          <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-white/40 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+          <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-white/60 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
         </div>
 
         <div className="p-8 bg-white rounded-[2.5rem] border border-slate-200 flex flex-col justify-between min-h-[300px] shadow-sm">

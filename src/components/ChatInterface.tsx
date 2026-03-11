@@ -13,8 +13,10 @@ import ReactMarkdown from "react-markdown";
 import { getChatResponseStream } from "../lib/gemini";
 import { portfolioData } from "../data/portfolio";
 
+type Role = "user" | "model";
+
 interface Message {
-  role: "user" | "model";
+  role: Role;
   content: string;
 }
 
@@ -52,11 +54,11 @@ export const ChatInterface = () => {
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
-    const history: { role: "user" | "model"; parts: { text: string }[] }[] = [
+    const history: { role: Role; parts: { text: string }[] }[] = [
       ...messages,
       { role: "user", content: userMessage },
     ].map((m) => ({
-      role: m.role,
+      role: m.role as Role,
       parts: [{ text: m.content }],
     }));
 
