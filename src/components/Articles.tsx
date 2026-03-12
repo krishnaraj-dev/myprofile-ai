@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { BookOpen, ExternalLink } from "lucide-react";
-import Link from "next/link";
+import { SpaLink } from "./SpaLink";
 import { getArticles, ArticleRecord } from "../lib/articles";
 import { portfolioData } from "../data/portfolio";
 import ReactMarkdown from "react-markdown";
@@ -88,12 +88,12 @@ export const Articles: React.FC = () => {
           className="max-w-4xl mx-auto px-6 mb-[68px] md:mb-[84px]"
         >
           <div className="mb-6">
-            <Link
+            <SpaLink
               href="/#articles"
               className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-indigo-600"
             >
               {"<-"} Back to articles
-            </Link>
+            </SpaLink>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-white p-8">
             <h3 className="text-2xl font-black text-slate-900 mb-2">
@@ -115,12 +115,12 @@ export const Articles: React.FC = () => {
         className="max-w-4xl mx-auto px-6 mb-[68px] md:mb-[84px]"
       >
         <div className="mb-6">
-          <Link
+          <SpaLink
             href="/#articles"
             className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-indigo-600"
           >
             {"<-"} Back to articles
-          </Link>
+          </SpaLink>
         </div>
         <article className="rounded-3xl border border-slate-200 bg-white p-8 md:p-10 shadow-sm">
           <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -259,14 +259,14 @@ export const Articles: React.FC = () => {
             }
 
             return (
-              <Link
+              <SpaLink
                 key={articleKey}
                 href={`/articles/${article.slug}`}
                 className="block"
                 aria-label={`Read article: ${article.title}`}
               >
                 {card}
-              </Link>
+              </SpaLink>
             );
           })}
         </AnimatePresence>

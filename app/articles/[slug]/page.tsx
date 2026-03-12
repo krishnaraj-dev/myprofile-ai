@@ -3,13 +3,14 @@ import { getArticles } from "../../../src/lib/articles";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
 
-type PageProps = {
-  params: { slug: string };
-};
-
-export default function ArticlePage({ params }: PageProps) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const articles = getArticles();
-  const article = articles.find((item) => item.slug === params.slug);
+  const article = articles.find((item) => item.slug === slug);
 
   if (!article) {
     return (

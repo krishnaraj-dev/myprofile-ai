@@ -42,6 +42,7 @@ export default [
       ...reactHooks.configs.recommended.rules,
       ...jsxA11y.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
+      "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",
     },
   },
