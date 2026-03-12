@@ -1,20 +1,41 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useSyncExternalStore } from "react";
 import { loadAnalytics } from "../lib/analytics";
 
 const CONSENT_KEY = "analytics-consent";
 
 export const AnalyticsConsent: React.FC = () => {
-  const [consent, setConsent] = useState<"accepted" | "declined" | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    const stored = window.localStorage.getItem(CONSENT_KEY);
-    if (stored === "accepted" || stored === "declined") {
-      setConsent(stored);
+  const getSnapshot = () => {
+    if (typeof window === "undefined") {
+      return null;
     }
-  }, []);
+    const stored = window.localStorage.getItem(CONSENT_KEY);
+    return stored === "accepted" || stored === "declined" ? stored : null;
+  };
+
+  const subscribe = (callback: () => void) => {
+    if (typeof window === "undefined") {
+      return () => undefined;
+    }
+    const handler = () => callback();
+    window.addEventListener("storage", handler);
+    window.addEventListener("consent-change", handler);
+    handler();
+    return () => {
+      window.removeEventListener("storage", handler);
+      window.removeEventListener("consent-change", handler);
+    };
+  };
+
+  const consent = useSyncExternalStore(subscribe, getSnapshot, () => null);
+
+  const updateConsent = (value: "accepted" | "declined") => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    window.localStorage.setItem(CONSENT_KEY, value);
+    window.dispatchEvent(new Event("consent-change"));
+  };
 
   useEffect(() => {
     if (consent === "accepted") {
@@ -22,7 +43,7 @@ export const AnalyticsConsent: React.FC = () => {
     }
   }, [consent]);
 
-  if (!isMounted || consent !== null) {
+  if (consent !== null) {
     return null;
   }
 
@@ -36,19 +57,13 @@ export const AnalyticsConsent: React.FC = () => {
         <div className="flex gap-2">
           <button
             className="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-semibold"
-            onClick={() => {
-              window.localStorage.setItem(CONSENT_KEY, "declined");
-              setConsent("declined");
-            }}
+            onClick={() => updateConsent("declined")}
           >
             Decline
           </button>
           <button
             className="px-4 py-2 rounded-full bg-indigo-600 text-white text-sm font-semibold"
-            onClick={() => {
-              window.localStorage.setItem(CONSENT_KEY, "accepted");
-              setConsent("accepted");
-            }}
+            onClick={() => updateConsent("accepted")}
           >
             Accept
           </button>

@@ -1,6 +1,7 @@
- "use client";
+"use client";
 import { getArticles } from "../../../src/lib/articles";
 import { BookOpen } from "lucide-react";
+import Link from "next/link";
 
 type PageProps = {
   params: { slug: string };
@@ -22,12 +23,12 @@ export default function ArticlePage({ params }: PageProps) {
           </span>
         </div>
 
-        <a
+        <Link
           href="/#articles"
           className="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors"
         >
-          ← Back to articles
-        </a>
+          {"<-"} Back to articles
+        </Link>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mt-4 mb-4 text-slate-900">
           Article not found
@@ -55,12 +56,12 @@ export default function ArticlePage({ params }: PageProps) {
         )}
       </div>
 
-      <a
+      <Link
         href="/#articles"
         className="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors"
       >
-        ← Back to articles
-      </a>
+        {"<-"} Back to articles
+      </Link>
 
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mt-4 mb-6 text-slate-900">
         {article.title}

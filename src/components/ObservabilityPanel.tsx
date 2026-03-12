@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 type MetricPayload = {
   name: string;
@@ -8,6 +8,9 @@ type MetricPayload = {
 };
 
 const readMetrics = (): MetricPayload[] => {
+  if (typeof window === "undefined") {
+    return [];
+  }
   try {
     const stored = window.localStorage.getItem("perf-metrics");
     return stored ? (JSON.parse(stored) as MetricPayload[]) : [];
@@ -18,13 +21,7 @@ const readMetrics = (): MetricPayload[] => {
 
 export const ObservabilityPanel: React.FC = () => {
   const [metrics] = useState<MetricPayload[]>(() => readMetrics());
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
+  if (typeof window === "undefined") {
     return null;
   }
 

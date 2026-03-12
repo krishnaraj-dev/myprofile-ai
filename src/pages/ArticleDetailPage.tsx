@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { BookOpen } from "lucide-react";
+import Link from "next/link";
 import { getArticles } from "../lib/articles";
 
 type ArticleDetailPageProps = {
@@ -23,12 +24,12 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({ slug }) =>
           </span>
         </div>
 
-        <a
+        <Link
           href="/#articles"
           className="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors"
         >
-          ← Back to articles
-        </a>
+          {"<-"} Back to articles
+        </Link>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mt-4 mb-4 text-slate-900">
           Article not found
@@ -56,12 +57,12 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({ slug }) =>
         )}
       </div>
 
-      <a
+      <Link
         href="/#articles"
         className="text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors"
       >
-        ← Back to articles
-      </a>
+        {"<-"} Back to articles
+      </Link>
 
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mt-4 mb-6 text-slate-900">
         {article.title}
