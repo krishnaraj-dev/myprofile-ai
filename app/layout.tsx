@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import React from "react";
 import "../src/index.css";
+import { Header } from "../src/components/Header";
+import { Footer } from "../src/components/Footer";
+import { BackgroundEffect } from "../src/components/BackgroundEffect";
+import { AnalyticsConsent } from "../src/components/AnalyticsConsent";
+import { ObservabilityPanel } from "../src/components/ObservabilityPanel";
+import { portfolioData } from "../src/data/portfolio";
 
 export const metadata: Metadata = {
   title: "Krishnaraj R | Lead Software Engineer & AI Architect",
@@ -55,7 +61,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-600 selection:text-white">
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <AnalyticsConsent />
+          <ObservabilityPanel />
+          <BackgroundEffect />
+          <Header />
+          <main id="main-content" className="pb-10">
+            {children}
+          </main>
+          <Footer contact={portfolioData.contact} />
+        </div>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-72WVNGJ78B"
           strategy="afterInteractive"

@@ -1,7 +1,5 @@
-"use client";
-import React from "react";
-import App from "../src/App";
+import { HomePage } from "../src/pages/HomePage";
 
 export default function Page() {
-  return <App />;
+  return <HomePage />;
 }

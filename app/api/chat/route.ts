@@ -1,6 +1,65 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { portfolioData } from "../../../src/data/portfolio";
 
+type ChatHistoryItem = {
+  role: "user" | "model";
+  parts: { text: string }[];
+};
+
+const isChatHistoryItem = (value: unknown): value is ChatHistoryItem => {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const item = value as ChatHistoryItem;
+  if (item.role !== "user" && item.role !== "model") {
+    return false;
+  }
+
+  if (!Array.isArray(item.parts)) {
+    return false;
+  }
+
+  return item.parts.every(
+    (part) => part && typeof part.text === "string" && part.text.length > 0,
+  );
+};
+
+const sanitizeHistory = (value: unknown): ChatHistoryItem[] => {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .filter(isChatHistoryItem)
+    .map((item) => ({
+      role: item.role,
+      parts: item.parts.map((part) => ({ text: part.text })),
+    }));
+};
+
+const captureServerError = async (error: unknown) => {
+  const endpoint = process.env.OBSERVABILITY_ENDPOINT;
+  if (!endpoint) {
+    return;
+  }
+
+  const payload = {
+    message: error instanceof Error ? error.message : "Unknown error",
+    stack: error instanceof Error ? error.stack : undefined,
+  };
+
+  try {
+    await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    // No-op to avoid cascading failures.
+  }
+};
+
 export async function POST(req: Request) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -9,7 +68,7 @@ export async function POST(req: Request) {
 
   const body = await req.json();
   const message = body?.message;
-  const history = Array.isArray(body?.history) ? body.history : [];
+  const history = sanitizeHistory(body?.history);
 
   if (typeof message !== "string" || message.trim().length === 0) {
     return new Response("Invalid message", { status: 400 });
@@ -92,6 +151,7 @@ export async function POST(req: Request) {
         }
         controller.close();
       } catch (error) {
+        await captureServerError(error);
         controller.error(error);
       }
     },

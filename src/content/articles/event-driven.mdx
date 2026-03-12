@@ -1,0 +1,122 @@
+export const meta = {
+  title: "Event-Driven Microservices: Patterns and Pitfalls",
+  category: "Tech Arch",
+  summary:
+    "Advanced design patterns for event-driven systems: contracts, idempotency, tracing, and failure containment at scale.",
+  date: "2026-03-05",
+  readingTime: "10 min",
+  tags: ["Architecture", "Messaging", "Reliability", "Distributed Systems"],
+};
+
+# Event-Driven Microservices: Patterns and Pitfalls
+
+Event-driven systems scale, but **only** when you treat them as **distributed systems** with explicit contracts, failure boundaries, and observability baked into the design. The “happy-path” architecture diagrams hide the hardest problems: message ordering, deduplication, and cross-service traceability.
+
+This article focuses on **advanced patterns** used in high-throughput, low-latency platforms where eventual consistency is a product requirement, not a bug.
+
+## The Core Architecture
+
+```
+Event Flow (Simplified)
+-----------------------
+Producer -> Broker -> Consumer
+    |         |          |
+  Outbox    Retry      Idempotent
+  Pattern   Policy     Handler
+```
+
+Key idea: **every hop** must be resilient to duplication, reordering, and partial failure.
+
+## 1) Contract-First Events
+
+Events are *public APIs*. Treat them like versioned contracts:
+
+- **Schema versioning** (backward compatible evolution).
+- **Event naming conventions** (domain + action + version).
+- **Compatibility guarantees** (what breaks vs what doesn’t).
+
+**Advanced pattern:** **Semantic event contracts**  
+Define invariants: fields that never change meaning, and fields that are *additive only*.
+
+## 2) Idempotency Beyond “Check If Exists”
+
+True idempotency requires **deterministic effects**:
+
+- Use **idempotency keys** tied to business context (not message IDs).
+- Persist processing state with **exactly-once effect** semantics (not delivery).
+- Ensure external calls are also safe or encapsulated with retries.
+
+```
+Idempotency Model
+-----------------
+Input: event + key
+Check: processed?
+Apply: deterministic mutation
+Store: effect metadata
+```
+
+## 3) Ordering Without Global Locks
+
+Global ordering is a performance killer. Use **bounded ordering**:
+
+- Partition by **aggregate ID** (customer, order, account).
+- Guarantee ordering per partition, not globally.
+- Prefer **sequence numbers** over timestamps.
+
+**Pitfall:** relying on timestamps for ordering creates “temporal lies” under clock skew and retries.
+
+## 4) Failure Containment (Avoid Retry Storms)
+
+When consumers fail in bulk, retries become denial-of-service.
+
+Advanced containment patterns:
+
+- **Dead-letter queues** with automated triage.
+- **Circuit breakers** at the consumer boundary.
+- **Backoff with jitter**, not exponential-only.
+- **Poison message quarantine** with automated alerts.
+
+## 5) Observability That Survives Async
+
+Async pipelines destroy trace continuity unless you carry context.
+
+- **Trace propagation**: include trace IDs in event payloads or headers.
+- **Correlation IDs**: stable across retries, not per delivery.
+- **Event sampling**: sample at the **root** of the workflow, not per service.
+
+```
+Trace Propagation
+-----------------
+Root Request -> Emit Event (trace-id)
+Consumer -> Child Span (same trace-id)
+Downstream -> Correlated spans
+```
+
+## 6) Data Consistency Patterns
+
+Pick consistency models deliberately:
+
+- **Sagas** for orchestrated multi-step workflows.
+- **Process managers** for long-running stateful flows.
+- **Read models** with projection lag metrics.
+
+**Rule:** Measure and expose *staleness*, don’t hide it.
+
+## 7) Performance Under Load
+
+Key levers:
+
+- Batch reads/writes in consumers (bounded size).
+- Use **async commit** where allowable.
+- Keep payloads small; store large blobs in object storage.
+
+## Common Pitfalls
+
+- **Hidden coupling** (consumers depend on internal producer logic).
+- **Opaque retries** (no visibility into reprocessing volume).
+- **Schema drift** (unversioned fields breaking consumers silently).
+
+## Closing Thoughts
+
+Event-driven architecture is a **contract discipline** as much as a scaling strategy.  
+If you enforce contracts, propagate trace context, and design for failure, you get true scalability without chaos.

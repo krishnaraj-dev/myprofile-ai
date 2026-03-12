@@ -1,0 +1,57 @@
+@page {
+  size: A4;
+  margin: 16mm;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  color: #0f172a;
+  background: #ffffff;
+  line-height: 1.5;
+}
+
+.resume {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.section {
+  margin-bottom: 16px;
+}
+
+.section h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #4f46e5;
+  margin-bottom: 6px;
+}
+
+.role {
+  font-weight: 700;
+}
+
+.meta {
+  color: #475569;
+  font-size: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  background: #eef2ff;
+  color: #4338ca;
+}

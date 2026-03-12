@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://krishnaraj-dev.github.io/myprofile-ai/sitemap.xml
+Sitemap: /sitemap.xml
