@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Krishnaraj R — Articles</title>
+    <link>https://krishnaraj-dev.github.io/myprofile-ai/</link>
+    <description>Technical and leadership articles from Krishnaraj R.</description>
+    <language>en-us</language>
+    <item>
+      <title>Engineering Culture at Scale: Beyond the Code</title>
+      <link>https://krishnaraj-dev.github.io/myprofile-ai/articles/engineering-culture</link>
+      <guid>https://krishnaraj-dev.github.io/myprofile-ai/articles/engineering-culture</guid>
+      <description>Fostering high-performance engineering cultures in distributed teams.</description>
+    </item>
+    <item>
+      <title>Mentorship as a Force Multiplier</title>
+      <link>https://krishnaraj-dev.github.io/myprofile-ai/#articles</link>
+      <guid>https://krishnaraj-dev.github.io/myprofile-ai/#articles-mentorship</guid>
+      <description>Building repeatable mentorship systems that scale leadership.</description>
+    </item>
+    <item>
+      <title>Event-Driven Microservices: Patterns and Pitfalls</title>
+      <link>https://krishnaraj-dev.github.io/myprofile-ai/articles/event-driven</link>
+      <guid>https://krishnaraj-dev.github.io/myprofile-ai/articles/event-driven</guid>
+      <description>Contracts, tracing, and failure recovery in asynchronous systems.</description>
+    </item>
+    <item>
+      <title>Advanced Caching Strategies for High-Traffic Systems</title>
+      <link>https://krishnaraj-dev.github.io/myprofile-ai/#articles</link>
+      <guid>https://krishnaraj-dev.github.io/myprofile-ai/#articles-caching</guid>
+      <description>Layered caching techniques and invalidation strategies.</description>
+    </item>
+  </channel>
+</rss>
